@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+</head>
+<body>
+    <div layout:fragment="content" class="body-section">
+        <div class="center-content-page" th:if="${tip != ''}">
+            <div class="detail-card">
+                <div class="detail-card-details">
+                  <span class="title" th:text="${tip.title}">Title</span>
+                  <span>Description : <span th:text="${tip.description}">Description</span></span>
+                  <hr />
+                  <span><b>Example</b></span>
+                  <span th:text="${tip.exampleHTMLEscape}"></span>
+                  <div class="delete-btn-container">
+                      <form class="delete-btn-container"
+                            method="post"
+                            th:if="${session.currentUserName != null}"
+                            th:action="'/bookmark/add-bookmark/'+${tip.id}">
+                          <button type="submit" class="btn btn-info mx-2">ADD TIP</button>
+                      </form>
+                      <form class="delete-btn-container"
+                            th:if="${session.currentUserRole == 'admin'}"
+                            th:action="'/update-tip/'+${tip.id}"
+                            method="get">
+                        <button type="submit" class="btn btn-info mx-2">Edit</button>
+                      </form>
+                      <form th:if="${session.currentUserRole == 'admin'}"
+                            th:action="'/delete-tip/'+${tip.id}"
+                            method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+</head>
+<body>
+<div layout:fragment="content" class="body-section">
+    <div class="center-content-page">
+        <div class="list-table-container">
+            <div class="list-table-header displayFlex-row">
+                <div><span class="title">User List</span></div>
+                <div class="style-btn"><a href="/user/create-user"><span>Create</span></a></div>
+            </div>
+            <table class="table table-borderless list-table" style="width: 100%">
+                <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Role</th>
+                      <th scope="col" style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- get "products" attribute which is a list from controllers and foreach loop it in table -->
+                <tr th:each="users : ${users}">
+                    <td th:text="${users.id}" style="width: 10%"></td>
+                    <td th:text="${users.username}" style="width: 20%"></td>
+                    <td th:text="${users.role}" style="width: 40%"></td>
+                    <td style="width: 20%">
+                        <ul class="action-container">
+                            <li><a th:href="'/user/edit-user/'+${users.id}"><i class="bi bi-pencil-square text-primary-emphasis"></i></a>
+                            </li>
+                            <form th:action="'/user/delete-user/'+${users.id}" method="post">
+                                <li>
+                                  <button class="btn-clear"><i class="bi bi-trash text-danger"></i></button>
+                                </li>
+                            </form>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

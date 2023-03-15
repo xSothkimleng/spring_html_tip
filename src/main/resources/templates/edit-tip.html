@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+</head>
+<body>
+<div layout:fragment="content" class="body-section">
+    <div class="center-content-page" th:if="${tip != ''}">
+        <form class="form-add-product" method="post" action="/update-tip">
+            <span class="title">EDIT TIP</span>
+            <input type="hidden" name="id" th:value="${tip.id}">
+            <div class="mb-3">
+                <label for="title" class="form-label" >Title</label>
+                <input type="text" class="form-control" id="title" name="title" required th:value="${tip.title}"/>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description" required th:value="${tip.description}"/>
+            </div>
+            <div>
+                <label for="exampleHtmlEscape" class="form-label">Example</label>
+                <div class="form-floating mb-3">
+                  <textarea name="exampleHtmlEscape" id="exampleHtmlEscape" class="textArea" rows="5" th:field="${tip.exampleHTMLEscape}" ></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Edit Tip</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

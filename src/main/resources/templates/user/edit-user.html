@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+</head>
+<body>
+<div layout:fragment="content" class="body-section">
+  <div class="center-content-page" th:if="${user != ''}">
+    <form class="form-add-product" method="post" action="/user/edit-user">
+      <span class="title">Edit User</span>
+      <input type="hidden" name="id" th:value="${user.id}"/>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required th:value="${user.username}"/>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="text" class="form-control" id="password" name="password" required th:value="${user.password}"/>
+      </div>
+      <div class="mb-3">
+        <label for="role" class="form-label">Role:</label>
+        <select id="role" class="form-control" name="role">
+          <option th:text="${user.role}" th:value="${user.role}"></option>
+          <option value="user">user</option>
+          <option value="admin">admin</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

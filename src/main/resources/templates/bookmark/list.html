@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+<div layout:fragment="content" class="body-section">
+    <div class="center-content-page">
+        <div class="list-table-container">
+            <div class="list-table-header displayFlex-row">
+                <span class="title">BOOKMARK List</span>
+            </div>
+            <table class="table table-borderless list-table" style="width: 100%">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col" style="text-align: center;">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--                 get "products" attribute which is a list from controllers and foreach loop it in table-->
+                <tr th:each="tip : ${htmlTips}">
+                    <td th:text="${tip.id}" style="width: 10%"></td>
+                    <td th:text="${tip.title}" style="width: 20%"></td>
+                    <td th:text="${tip.description}" style="width: 40%"></td>
+                    <td style="width: 20%">
+                        <ul class="action-container">
+                            <li><a th:href="'/tip-detail/'+${tip.id}"><i class="bi bi-eye text-info"></i></a></li>
+                            <form th:action="'/delete-bookmark/'+${tip.id}" method="post">
+                                <li>
+                                    <button class="btn-clear"><i class="bi bi-trash text-danger"></i></button>
+                                </li>
+                            </form>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
